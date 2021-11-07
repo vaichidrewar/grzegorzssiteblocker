@@ -1,5 +1,51 @@
 'use strict';
+console.log("Hello, World!")
 
+chrome.webNavigation.onCommitted.addListener(function (tab) {
+  // Prevents script from running when other frames load
+  if (tab.frameId == 0) {
+      chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+
+          // Get the URL of the webpage
+          let url = tabs[0].url;
+          // Remove unnecessary protocol definitions and www subdomain from the URL
+          let parsedUrl = url.replace("https://", "")
+              .replace("http://", "")
+              .replace("www.", "")
+
+          // Remove path and queries e.g. linkedin.com/feed or linkedin.com?query=value
+          // We only want the base domain
+          let domain = parsedUrl.slice(0, parsedUrl.indexOf('/') == -1 ? parsedUrl.length : parsedUrl.indexOf('/'))
+              .slice(0, parsedUrl.indexOf('?') == -1 ? parsedUrl.length : parsedUrl.indexOf('?'));
+
+          try {
+              if (domain.length < 1 || domain === null || domain === undefined) {
+                  console.log("Did not match mail.google.com")
+                  return;
+              } else if (domain == "mail.google.com") {
+                  console.log("mail.google.com matched")
+                  runLinkedinScript();
+                  return;
+              }
+          } catch (err) {
+              throw err;
+          }
+
+      });
+  }
+});
+
+function runLinkedinScript() {
+  // Inject script from file into the webpage
+  chrome.tabs.executeScript({
+      file: 'linkedin.js'
+  });
+  return true;
+}
+
+/** ------------------------- */
+// OLD CODE
+/** ------------------------- */
 chrome.runtime.onInstalled.addListener(function(details) {
   if (details.reason == "install") {
     // Set blocked in storage.sync if unset.

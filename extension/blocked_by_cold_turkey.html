@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Blocked by Cold Turkey</title>
+    <link href="./assets/bootstrap.min.css" rel="stylesheet">
+    <style>
+      @charset "utf-8";
+      @font-face {
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: 700;
+        src: local('Open Sans Bold'), local('OpenSans-Bold'), url(./assets/os-bold.woff2) format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      body {
+        height: 100%;
+        font-family:"Open Sans", Helvetica, sans-serif;
+        font-weight: 700;
+        margin: 0;
+      }
+      label {
+        color: #27272a;
+        font-size: 14px;
+      }
+      li > p {
+        margin-left: 15px;
+        margin-right: 15px;
+	margin-bottom: 15px;
+        color: #27272a;
+        font-size: 14px;
+      }
+      a {
+        outline: 0 !important;
+      }
+      #blocked-logo {
+        padding-bottom: 15px;
+      }
+      #blocked-options {
+        position: absolute;
+        bottom: 15px;
+        left: 15px;
+	z-index: 2;
+      }
+      #charity-options {
+        position: absolute;
+        bottom: 15px;
+        right: 15px;
+	z-index: 2;
+      }
+      #blocked-container {
+        position: absolute;
+        top: 50%;
+        margin-top: -100px;        left: 0px;
+        width: 100%;
+      }
+      #blocked-content {
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        word-wrap: break-word;
+      }
+      #blocked-banner {
+        position: absolute;
+        bottom: 0px;
+        height: 64px;
+        width: 100%;
+        color: #FAFAFA;
+        background: #343438;
+        text-align: center;
+        overflow: hidden;
+	z-index: 1;
+        padding-right: 200px;
+        padding-left: 200px;
+      }
+      .blocked-text {
+        font-size: 14px;
+        font-weight: 700;
+      }
+      .blocked-quote {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 14px;
+        font-weight: 700;
+      }
+      .btn {
+        padding: 6px 12px !important;
+        font-size: 14px !important;
+        font-weight: bold !important;
+      }
+      .btn-green {
+        color: #FAFAFA !important;
+        background: #65a30d !important;
+        border-style: none !important;
+        -webkit-border-radius:5px;
+        -moz-border-radius:5px;
+        border-radius:5px;
+      }
+      .btn-green:hover, .btn-green:active, .btn-green:focus {
+        color: #FAFAFA !important;
+        background: #4D7C0F !important;
+      }
+      .btn-red {
+        color: #FAFAFA !important;
+        background: #ef4444 !important;
+        border-style: none !important;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+      }
+      .btn-red:hover, .btn-red:active, .btn-red:focus {
+        color: #FAFAFA !important;
+        background: #dc2626 !important;
+      }
+      .dropdown-menu {
+        width: 350px;
+        background: #FAFAFA;
+      }
+      .dropdown-menu-left {
+        left: -191px;
+      }
+      .dropdown {
+        padding-left: 30px;
+      }
+      .title {
+        color: #27272a;
+        font-size: 20px;
+        margin-bottom: 20px;
+        margin-top: 15px;
+        text-align: center;
+      }
+      .checkboxes label {
+        display: block;
+        float: left;
+        margin-left: 15px;
+        white-space: nowrap;
+        width: 100%;
+      }
+      .checkboxes input {
+        vertical-align: middle;
+      }
+      .checkboxes label span {
+        vertical-align: middle;
+      }
+      .custom-text {
+        background: #FAFAFA;
+        color: #27272a;
+        margin-left: 15px;
+        width: 318px;
+        resize:none;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        margin-bottom: 15px;
+        border-radius: 5px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: rgb(169, 169, 169);
+        border-radius: 5px;
+
+      }
+      .custom-banner-text {
+        background: #FAFAFA;
+        color: #27272a;
+        margin-left: 15px;
+        width: 318px;
+        resize:none;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        margin-bottom: 15px;
+        border-radius: 5px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: rgb(169, 169, 169);
+        border-radius: 5px;
+
+      }
+      .charity-key {
+        background: #FAFAFA;
+        color: #27272a;
+        margin-left: 15px;
+        width: 318px;
+        height: 28px;
+        resize:none;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        border-width: 1px;
+        border-style: solid;
+        border-color: rgb(169, 169, 169);
+        border-radius: 5px;
+        text-align: center;
+      }
+      .colorpicker label {
+        margin-left: 15px;
+      }
+      .colorpicker label span {
+        margin-left: 10px;
+      }
+      .button-reset {
+        float: right;
+        margin-top: 20px;
+        margin-bottom: 15px;
+        margin-right: 15px;
+      }
+      .button-buy-break {
+        text-align: center;
+        margin-top: 15px;
+        margin-bottom: 30px;
+      }
+      .button-start-break {
+        text-align: center;
+        margin-top: 15px;
+        margin-bottom: 30px;
+      }
+      .dropdown-menu > li > a {
+        display: inline;
+      }
+      .break-info {
+        font-size: 10px;
+        font-style: italic;
+        text-align: center;
+      }
+    </style>
+
+    <!-- Matomo -->
+    <script type="text/javascript">
+      var _paq = _paq || [];
+      /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//getcoldturkey.com/analytics/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    <!-- End Matomo Code -->
+  
+  </head>
+  <body style="background: #27272a; color: #FAFAFA;">
+    <div id="blocked-container">
+      <div id="blocked-content">
+        <div id="blocked-logo" style=""><a href="https://getcoldturkey.com/" target="_blank" title="Cold Turkey Blocker"><img src="./assets/logo.png" width=64 alt="Cold Turkey Blocker"/></a></div>
+        <div id="displayed-text" class="blocked-text">You've quit this site, Cold Turkey.</div>
+      </div>
+    </div>
+    
+        <div id="blocked-options">
+          <a onclick="javascript:window.open('https://chrome.google.com/webstore/detail/cold-turkey/pganeibhckoanndahmnfggfoeofncnii/reviews');" class="btn btn-green">Leave a Review! ❤</a>
+        </div>
+        <div id="blocked-banner" style="">
+          <div id="displayed-quote" class="blocked-quote">Change your thoughts and you change your world. -Norman Vincent Peale</div>
+        </div>
+        <div id="charity-options" class="dropup">
+          <a href="#" class="dropdown-toggle btn btn-red" data-toggle="dropdown">Pause for a Cause...</a>
+          <ul class="dropdown-menu dropdown-menu-left shadow">
+            <li class="title">
+              Pause for a Cause
+            </li>
+            <li>
+              <p>Here's the deal. For <span class="paddle-gross" data-product="601200">about $5 USD</span>, Cold Turkey Blocker will pause your blocks for 10 minutes. Proceeds will be donated to the <a href="https://wwf.ca/" target="_blank">World Wildlife Fund</a>.</p>
+            </li>
+            <li>
+              <p>Please note that you'll need to access your email to receive your break key.</p>
+            </li>
+            <li class="button-buy-break">
+              <a href="#" data-allow-quantity="true" data-theme="none" data-product="601200" class="btn btn-green paddle_button" target="_blank">Buy Break</a>
+            </li>
+            <li>
+              <input type="text" id="charity-key" class="charity-key" autocomplete="off" maxlength="10" placeholder="10 Digit Break Key...">
+            </li>
+            <li class="button-start-break">
+              <a class="btn btn-red" id="charity-submit" onclick="checkKey();">Pause Blocks</a>
+            </li>
+            <li>
+              <p class="break-info">You can block this feature under Settings > Blocking.</p>
+            </li>
+          </ul>
+        </div>
+        <!-- Paddle -->
+          <script src="https://cdn.paddle.com/paddle/paddle.js"></script>
+          <script type="text/javascript">
+          Paddle.Setup({ vendor: 116934 });
+        </script>
+        <!-- End Paddle Code -->    <script src="./assets/jquery-1.9.0.min.js"></script>
+    <script src="./assets/bootstrap.min.js"></script>
+    <script>
+      function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for(var i = 0; i <ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+      }
+      function setCookie(cname, cvalue) {
+        var d = new Date();
+        d.setTime(d.getTime() + (1000*86400*365*10));  // Expire in 10 years
+        var expires = "expires="+d.toUTCString();
+        document.cookie = cname + "=" + cvalue + "; expires=" + expires + "; path=/blocked; SameSite=None; Secure";
+      }
+      function checkKey() {
+        window.postMessage({ command: "cold-turkey-blocker-pause", key: $('#charity-key').val() }, "*");
+	$('#charity-options').click();
+      }
+            $(document).ready(function() {
+        $(".dropdown-menu li").click(function(e) {
+          e.stopPropagation();
+        });
+        $("#charity-key").on("keydown",function(e){
+          if (e.keyCode == 13) {
+            e.preventDefault();
+            $("#charity-submit").click();
+          }
+        });
+              });
+    </script>
+  </body>
+</html>
