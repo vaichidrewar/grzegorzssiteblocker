@@ -2,7 +2,7 @@
   "name": "Vaibhav's Site Blocker",
   "description": "This extension blocks unwanted sites.",
   "author": "Grzegorz Milka",
-  "version": "1.7.8",
+  "version": "1.7.9",
   "manifest_version": 2,
   "icons": {
       "128": "g_128.png"

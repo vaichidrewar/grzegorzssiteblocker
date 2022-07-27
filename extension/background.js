@@ -13,17 +13,18 @@ chrome.webNavigation.onCommitted.addListener(function (tab) {
               .replace("http://", "")
               .replace("www.", "")
 
-          // Remove path and queries e.g. linkedin.com/feed or linkedin.com?query=value
-          // We only want the base domain
-          let domain = parsedUrl.slice(0, parsedUrl.indexOf('/') == -1 ? parsedUrl.length : parsedUrl.indexOf('/'))
-              .slice(0, parsedUrl.indexOf('?') == -1 ? parsedUrl.length : parsedUrl.indexOf('?'));
-
+          let domain = parsedUrl
+          // // Remove path and queries e.g. linkedin.com/feed or linkedin.com?query=value
+          // // We only want the base domain
+          // let domain = parsedUrl.slice(0, parsedUrl.indexOf('/') == -1 ? parsedUrl.length : parsedUrl.indexOf('/'))
+          //     .slice(0, parsedUrl.indexOf('?') == -1 ? parsedUrl.length : parsedUrl.indexOf('?'));
+          console.log("domain:" + domain)
           try {
               if (domain.length < 1 || domain === null || domain === undefined) {
                   console.log("Did not match mail.google.com")
                   return;
-              } else if (domain == "mail.google.com") {
-                  console.log("mail.google.com matched")
+              } else if (domain.match("mail.google.com/mail")) {
+                  console.log("mail.google.com/mail matched")
                   runLinkedinScript();
                   return;
               }
